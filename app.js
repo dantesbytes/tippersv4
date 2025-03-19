@@ -6,14 +6,11 @@ import transactionRoutes from './routes/transactionRoutes.js';
 import cors from "@fastify/cors";
 dotenv.config();
 
-
-
 const fastify = Fastify({
   ignoreTrailingSlash: true,
   caseSensitive: false,
   logger: {
-    level: "info",
-    prettyPrint: true,
+    level: "info"
   }
   
 });
