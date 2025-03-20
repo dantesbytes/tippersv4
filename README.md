@@ -1,3 +1,5 @@
+# personal projected some functions are design to not work 
+
 # TIPPERS API
 
 ```

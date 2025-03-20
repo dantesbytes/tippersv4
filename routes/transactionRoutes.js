@@ -10,6 +10,7 @@ async function transactionRoutes(fastify, options) {
 
     try {
       const transactions = await fetchEtherscanTransactions(address);
+
       reply.send(transactions);
     } catch (error) {
       reply.status(500).send({ error: error.message });
