@@ -2,7 +2,14 @@
 import fp from "fastify-plugin";
 import fastifyCors from "@fastify/cors";
 
-
+const fastify = Fastify({
+  ignoreTrailingSlash: true,
+  caseSensitive: false,
+  logger: {
+    level: "info"
+  }
+  
+});
 
 
 
