@@ -1,16 +1,38 @@
-// plugins/corsPlugin.js
-import fastifyCors from '@fastify/cors';
+"use strict";
+import fp from "fastify-plugin";
+import fastifyCors from "@fastify/cors";
 
 
-export default async function (fastify, options) {
-  this.fastify.register(fastifyCors, {
+
+
+
+async function corsPlugin(fastify, options) {
+  fastify.register(fastifyCors, {
+    
     origin: false,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
-  });
+  
+});
 }
 
+export default fp(corsPlugin);
+
+//export { serverOptions as options };
 
 
 
+
+
+
+
+/**
+ * fastify.register(cors, {
+   origin: "http://localhost:3000", // Adjust for production (e.g., 'https://yourdomain.com')
+   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+   allowedHeaders: ["Content-Type", "Authorization"],
+   credentials: true,
+ });
+ 
+ */
