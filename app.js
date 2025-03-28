@@ -13,16 +13,23 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const app = fastify();
-
 connectDB();
 
+//auto load middleware
 app.register(autoLoad, {
   dir: path.join(__dirname, 'plugins'),
   dirNameRoutePrefix: false,
   ignorePattern: /.*.no-load\.js/,
 })
 
-app.register(transactionRoutes);
+//auto load routes
+app.register(autoLoad, {
+  dir: path.join(__dirname, 'routes'),
+  indexPattern: /.*routes(\.js|\.cjs)$/i,
+  ignorePattern: /.*\.js/,
+})
+
+
 
 const start = async () => {
   try {
