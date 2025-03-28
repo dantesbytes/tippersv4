@@ -2,17 +2,6 @@
 import fp from "fastify-plugin";
 import fastifyCors from "@fastify/cors";
 
-const fastify = Fastify({
-  ignoreTrailingSlash: true,
-  caseSensitive: false,
-  logger: {
-    level: "info"
-  }
-  
-});
-
-
-
 async function corsPlugin(fastify, options) {
   fastify.register(fastifyCors, {
     
@@ -26,7 +15,6 @@ async function corsPlugin(fastify, options) {
 
 export default fp(corsPlugin);
 
-//export { serverOptions as options };
 
 
 

@@ -13,7 +13,6 @@ const __dirname = dirname(__filename)
 const app = fastify();
 connectDB();
 
-//auto load middleware
 app.register(autoLoad, {
   dir: path.join(__dirname, 'plugins'),
   dirNameRoutePrefix: false,
