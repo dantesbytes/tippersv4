@@ -16,14 +16,26 @@ const fetchEtherscanTransactions = async (address) => {
     const options = { hostname, path, method: 'GET' };
 
     const req = https.request(options, (res) => {
-      let data = '';
-      res.on('data', (chunk) => { data += chunk; });
+      
+      let body = '';
+      res.on('data', (chunk) => {
+
+        body += chunk;
+      });
+
+
       res.on('end', async () => {
         try {
-          const jsonData = JSON.parse(data);
+
+          const jsonData = JSON.parse(body);
+
           if (jsonData.status === "1") {
-            await Transaction.insertMany(jsonData.result, { ordered: false }).catch(() => {});
+
+            await Transaction.insertMany(jsonData.result, { ordered: false }).catch(() => { });
+            
+
             resolve(jsonData.result);
+            
           } else {
             reject('No transactions found');
           }
@@ -38,5 +50,10 @@ const fetchEtherscanTransactions = async (address) => {
   });
 };
 
+
+const eth_TransactionReceipt = async (address) => {
+
+  const apiKey = process.env.ETHERSCAN_API_KEY;
+}
 export { fetchEtherscanTransactions };
 
