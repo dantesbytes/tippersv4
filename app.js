@@ -5,28 +5,31 @@ import connectDB from "./db/connect.js";
 import autoLoad from "@fastify/autoload";
 import path from "path";
 import displayCoolAsciiArt from "./utils/art.js";
-import { fileURLToPath } from 'node:url'
-import { dirname, join } from 'node:path'
+import { fileURLToPath } from "url";
+
 dotenv.config();
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = fastify();
 connectDB();
 
+//auto load plugins
+
 app.register(autoLoad, {
-  dir: path.join(__dirname, 'plugins'),
+  dir: path.join(__dirname, "plugins"),
   dirNameRoutePrefix: false,
   ignorePattern: /.*.no-load\.js/,
-})
+});
 
 //auto load routes
 app.register(autoLoad, {
-  dir: path.join(__dirname, 'routes'),
-  indexPattern: /.*routes(\.js|\.cjs)$/i,
-  ignorePattern: /.*\.js/,
-})
-
-
+  dir: path.join(__dirname, "routes"),
+  dirNameRoutePrefix: false,
+  //indexPattern: /.*routes(\.js|\.cjs)$/i,
+  //ignorePattern: /.*\.js/,
+});
 
 const start = async () => {
   try {
